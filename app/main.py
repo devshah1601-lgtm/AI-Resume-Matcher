@@ -46,7 +46,10 @@ class LoginRequest(BaseModel):
 Base.metadata.create_all(bind=engine)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:63342"],
+    allow_origins=[
+        "http://localhost:63342",
+        "https://ai-resume-matcher-frontend-fn7i.onrender.com",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
