@@ -1,4 +1,4 @@
-const API_URL = "http://127.0.0.1:8001";
+const API_URL = "https://ai-resume-matcher-jxpz.onrender.com";
 
 const authSection = document.getElementById("authSection");
 const appSection = document.getElementById("appSection");
