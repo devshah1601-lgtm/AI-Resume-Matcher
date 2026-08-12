@@ -1,8 +1,19 @@
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 
-# Load the AI model once when the application starts
-model = SentenceTransformer("all-MiniLM-L6-v2")
+
+model = None
+
+
+def get_model():
+    global model
+
+    if model is None:
+        print("Loading semantic AI model...")
+        model = SentenceTransformer("all-MiniLM-L6-v2")
+        print("Semantic AI model loaded.")
+
+    return model
 
 
 def calculate_semantic_similarity(
@@ -14,8 +25,10 @@ def calculate_semantic_similarity(
     and a job description.
     """
 
-    resume_embedding = model.encode([resume_text])
-    job_embedding = model.encode([job_description])
+    semantic_model = get_model()
+
+    resume_embedding = semantic_model.encode([resume_text])
+    job_embedding = semantic_model.encode([job_description])
 
     similarity = cosine_similarity(
         resume_embedding,
@@ -28,6 +41,4 @@ def calculate_semantic_similarity(
     # into a percentage (0 to 100)
     score = ((float(similarity) + 1) / 2) * 100
 
-    score = round(score, 2)
-
-    return score
+    return round(score, 2)
