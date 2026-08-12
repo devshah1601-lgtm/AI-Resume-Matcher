@@ -1,0 +1,24 @@
+# Environment variables / secrets
+.env
+
+# Python virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# PyCharm
+.idea/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Uploaded/generated PDF files
+temp_*.pdf
+
+# OS files
+.DS_Store
+Thumbs.db

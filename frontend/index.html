@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Resume Matcher</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div id="notificationContainer"></div>
+
+<!-- =========================================================
+     AUTH SCREEN
+========================================================= -->
+
+<div id="authSection" class="auth-screen">
+
+    <div class="auth-card">
+
+        <div class="auth-logo">
+            <div class="logo-icon">📄</div>
+            <span>AI Resume Matcher</span>
+        </div>
+
+        <h1>Welcome back</h1>
+
+        <p class="auth-subtitle">
+            Login to analyze your resume and discover your job match.
+        </p>
+
+        <label for="email">Email</label>
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Enter your email"
+            autocomplete="email"
+        >
+
+        <label for="password">Password</label>
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+        >
+
+        <div class="auth-buttons">
+
+            <button id="loginBtn" class="primary-btn">
+                Login
+            </button>
+
+            <button id="signupBtn" class="secondary-btn">
+                Create Account
+            </button>
+
+        </div>
+
+        <p id="authMessage" class="auth-message"></p>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     APPLICATION
+========================================================= -->
+
+<div id="appSection" class="app-shell hidden">
+
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOP BAR
+        ================================================== -->
+
+        <header class="topbar">
+
+    <!-- BRAND -->
+    <div class="topbar-brand">
+        <div class="brand-icon">📄</div>
+        <span>AI Resume <b>Matcher</b></span>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav class="top-navigation">
+
+        <a href="#dashboard" class="top-nav-item active">
+            🏠
+            <span>Dashboard</span>
+        </a>
+
+        <a href="#new-analysis" class="top-nav-item">
+            ⊕
+            <span>New Analysis</span>
+        </a>
+
+        <a href="#history" class="top-nav-item">
+            ◷
+            <span>History</span>
+        </a>
+
+    </nav>
+
+    <!-- USER -->
+    <div class="topbar-user">
+
+        <div class="topbar-avatar">
+            👤
+        </div>
+
+        <strong id="userEmail">
+            User
+        </strong>
+
+        <span class="user-arrow">
+            ▼
+        </span>
+
+        <button
+            id="logoutBtn"
+            class="logout-btn"
+        >
+            ⇥ &nbsp; Logout
+        </button>
+
+    </div>
+
+</header>
+
+        <!-- =================================================
+             DASHBOARD
+        ================================================== -->
+
+        <section id="dashboard" class="dashboard-page">
+
+
+            <!-- PAGE TITLE -->
+
+            <div class="welcome-banner">
+
+    <div class="welcome-content">
+
+        <span class="welcome-label">
+            Welcome back, 👋
+        </span>
+
+        <h1 id="welcomeName">
+            User
+        </h1>
+
+        <p>
+            Ready to discover how strong your resume is for your next opportunity?
+        </p>
+
+    </div>
+
+    <div class="welcome-illustration">
+
+        <div class="illustration-card">
+            📄
+        </div>
+
+        <div class="illustration-line line-one"></div>
+        <div class="illustration-line line-two"></div>
+        <div class="illustration-line line-three"></div>
+
+        <span class="sparkle sparkle-one">✦</span>
+        <span class="sparkle sparkle-two">✦</span>
+
+    </div>
+
+</div>
+
+
+            <!-- =================================================
+                 SUMMARY CARDS
+            ================================================== -->
+
+            <div class="dashboard-summary">
+
+
+                <div class="summary-card">
+
+                    <div class="summary-icon purple">
+                        📊
+                    </div>
+
+                    <div class="summary-content">
+
+                        <h3 id="totalAnalyses">
+                            0
+                        </h3>
+
+                        <p>
+                            Total Analyses
+                        </p>
+
+                        <span>
+                            All time analyses
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <div class="summary-icon green">
+                        🎯
+                    </div>
+
+                    <div class="summary-content">
+
+                        <h3 id="averageScore">
+                            0%
+                        </h3>
+
+                        <p>
+                            Average Match
+                        </p>
+
+                        <span>
+                            Your average score
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <div class="summary-icon yellow">
+                        ⭐
+                    </div>
+
+                    <div class="summary-content">
+
+                        <h3 id="bestScore">
+                            0%
+                        </h3>
+
+                        <p>
+                            Best Match
+                        </p>
+
+                        <span>
+                            Highest score achieved
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <div class="summary-icon blue">
+                        📄
+                    </div>
+
+                    <div class="summary-content">
+
+                        <h3 id="resumeCount">
+                            0
+                        </h3>
+
+                        <p>
+                            Resumes Analyzed
+                        </p>
+
+                        <span>
+                            Total resumes
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <!-- =================================================
+     AI CAREER INSIGHTS
+================================================== -->
+
+<section class="career-insights">
+
+    <div class="career-insights-header">
+
+        <div>
+            <span class="insights-label">
+                ✨ AI INSIGHTS
+            </span>
+
+            <h2>
+                Build a stronger resume
+            </h2>
+
+            <p>
+                Get more from every resume analysis with focused,
+                actionable career insights.
+            </p>
+        </div>
+
+        <div class="insights-main-icon">
+            ✨
+        </div>
+
+    </div>
+
+
+    <div class="career-insights-grid">
+
+        <div class="career-tip" id="careerMatchInsight">
+
+            <div class="career-tip-icon purple">
+                🎯
+            </div>
+
+            <div>
+                <strong>
+                    Improve your match
+                </strong>
+
+                <p>
+                    Tailor your resume to the skills and
+                    requirements in each job description.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="career-tip" id="careerProgressInsight">
+
+            <div class="career-tip-icon green">
+                📈
+            </div>
+
+            <div>
+                <strong>
+                    Track your progress
+                </strong>
+
+                <p>
+                    Analyze more opportunities and compare
+                    your match scores over time.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="career-tip" id="careerSkillsInsight">
+
+            <div class="career-tip-icon yellow">
+                💡
+            </div>
+
+            <div>
+                <strong>
+                    Use AI recommendations
+                </strong>
+
+                <p>
+                    Focus on missing skills and resume
+                    suggestions to strengthen your profile.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+            <!-- =================================================
+                 MAIN DASHBOARD GRID
+            ================================================== -->
+
+            <div class="dashboard-grid">
+
+
+                <!-- =================================================
+                     NEW ANALYSIS
+                ================================================== -->
+
+                <section
+                    id="new-analysis"
+                    class="dashboard-card analysis-input-card"
+                >
+
+                    <div class="card-heading">
+
+                        <div>
+
+                            <h2>
+                                Analyze New Resume
+                            </h2>
+
+                            <p>
+                                Upload your resume and job description to get AI-powered insights.
+                            </p>
+
+                        </div>
+
+                        <div class="heading-decoration">
+                            ✨
+                        </div>
+
+                    </div>
+
+
+                    <!-- STEP 1 -->
+
+                    <div class="analysis-step">
+
+                        <div class="step-title">
+
+                            <span class="step-number">
+                                1
+                            </span>
+
+                            <strong>
+                                Upload Resume
+                            </strong>
+
+                        </div>
+
+
+                        <label
+                            for="resume"
+                            class="upload-zone"
+                        >
+
+                            <div class="upload-icon">
+                                ☁
+                            </div>
+
+                            <strong>
+                                Drag & drop your resume here
+                            </strong>
+
+                            <span>
+                                PDF only • Max 5MB
+                            </span>
+
+                            <span class="choose-file">
+                                📄 Choose File
+                            </span>
+
+                        </label>
+
+
+                        <input
+                            type="file"
+                            id="resume"
+                            accept=".pdf"
+                            hidden
+                        >
+
+                        <div
+                            id="selectedFile"
+                            class="selected-file hidden"
+                        >
+
+                            <span>
+                                📄
+                            </span>
+
+                            <span id="selectedFileName">
+                                No file selected
+                            </span>
+
+                            <span class="file-success">
+                                ✓
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- STEP 2 -->
+
+                    <div class="analysis-step">
+
+                        <div class="step-title">
+
+                            <span class="step-number">
+                                2
+                            </span>
+
+                            <strong>
+                                Job Description
+                            </strong>
+
+                        </div>
+
+                        <p class="field-help">
+                            Paste the job description or key requirements.
+                        </p>
+
+
+                        <textarea
+                            id="jobDescription"
+                            placeholder="Paste the job description here..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <!-- ANALYZE BUTTON -->
+
+                    <button
+                        id="analyzeBtn"
+                        class="analyze-btn"
+                    >
+
+                        ✨
+                        Analyze Resume
+
+                    </button>
+
+
+                </section>
+
+
+                <!-- =================================================
+                     ANALYSIS RESULTS
+                ================================================== -->
+
+                <section
+                    id="result"
+                    class="dashboard-card results-card hidden"
+                >
+
+                    <div class="results-heading">
+
+                        <div>
+
+                            <h2>
+                                Analysis Results
+                            </h2>
+
+                            <p>
+                                Here's how your resume matches the job requirements.
+                            </p>
+
+                        </div>
+
+                        <span
+                            id="matchStatus"
+                            class="match-status"
+                        >
+                            Great Match! 🎉
+                        </span>
+
+                    </div>
+
+
+                    <!-- SCORE -->
+
+                    <div class="score-section">
+
+                        <div
+                            class="score-ring"
+                            id="scoreRing"
+                        >
+
+                            <div class="score-ring-inner">
+
+                                <strong id="finalScore">
+                                    0
+                                </strong>
+
+                                <span>
+                                    %
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <h3>
+                            Overall Match Score
+                        </h3>
+
+                        <p>
+                            How well your resume matches this role
+                        </p>
+
+                    </div>
+
+
+                    <!-- MATCHED / MISSING -->
+
+                    <div class="skills-grid">
+
+
+                        <div class="skill-panel matched-panel">
+
+                            <div class="panel-title matched-title">
+                                ✓ Matched Skills
+                            </div>
+
+                            <ul id="matchedSkills"></ul>
+
+                        </div>
+
+
+                        <div class="skill-panel missing-panel">
+
+                            <div class="panel-title missing-title">
+                                ✕ Missing Skills
+                            </div>
+
+                            <ul id="missingSkills"></ul>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- RECOMMENDATIONS -->
+
+                    <div class="insight-panel recommendation-panel">
+
+                        <div class="insight-title">
+                            💡 Skill Recommendations
+                        </div>
+
+                        <ul id="recommendations"></ul>
+
+                    </div>
+
+
+                    <!-- RESUME SUGGESTIONS -->
+
+                    <div class="insight-panel resume-panel">
+
+                        <div class="insight-title">
+                            📄 Resume Suggestions
+                        </div>
+
+                        <ul id="resumeSuggestions"></ul>
+
+                    </div>
+
+
+                    <!-- INTERVIEW -->
+
+                    <div class="insight-panel interview-panel">
+
+                        <div class="insight-title">
+                            🎤 Interview Questions
+                        </div>
+
+                        <ol id="interviewQuestions"></ol>
+
+                    </div>
+
+                </section>
+
+                <!-- =================================================
+     AI CAREER INSIGHTS
+================================================== -->
+
+<section class="dashboard-card career-insights-card">
+
+    <div class="career-insights-heading">
+
+        <div class="career-insights-icon">
+            ✨
+        </div>
+
+        <div>
+
+            <h2>
+                AI Career Insights
+            </h2>
+
+            <p>
+                Personalized insights based on your analysis history.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- CURRENT MATCH -->
+
+    <div
+        id="careerMatchInsight"
+        class="career-insight-item"
+    >
+
+        <div class="career-insight-icon match-icon">
+            🎯
+        </div>
+
+        <div class="career-insight-content">
+
+            <span>
+                Current Match
+            </span>
+
+            <strong>
+                Start your first analysis
+            </strong>
+
+            <p>
+                Upload your resume and compare it with a job description to get your first match score.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- PROGRESS -->
+
+    <div
+        id="careerProgressInsight"
+        class="career-insight-item"
+    >
+
+        <div class="career-insight-icon progress-icon">
+            📈
+        </div>
+
+        <div class="career-insight-content">
+
+            <span>
+                Your Progress
+            </span>
+
+            <strong>
+                Build your career profile
+            </strong>
+
+            <p>
+                Your match history will appear here as you analyze more opportunities.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- SKILLS -->
+
+    <div
+        id="careerSkillsInsight"
+        class="career-insight-item"
+    >
+
+        <div class="career-insight-icon skills-icon">
+            🧠
+        </div>
+
+        <div class="career-insight-content">
+
+            <span>
+                Skill Focus
+            </span>
+
+            <strong>
+                Discover missing skills
+            </strong>
+
+            <p>
+                AI will identify skills you may want to add or strengthen for your target roles.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+            </div>
+
+
+            <!-- =================================================
+                 LOADING
+            ================================================== -->
+
+            <div
+    id="loading"
+    class="loading-card hidden"
+>
+
+    <div class="loading-spinner"></div>
+
+    <h3 id="loadingTitle">
+        Analyzing your resume...
+    </h3>
+
+    <p id="loadingMessage">
+        Our AI is comparing your skills with the job requirements.
+    </p>
+
+    <div
+        id="loadingFile"
+        class="loading-file hidden"
+    >
+        📄
+        <span id="loadingFileName"></span>
+    </div>
+
+    <div class="loading-dots">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+</div>
+
+
+            <!-- =================================================
+                 SAVED ANALYSIS DETAILS
+            ================================================== -->
+
+            <section
+                id="savedAnalysisDetails"
+                class="dashboard-card saved-details hidden"
+            >
+
+                <div class="card-heading">
+
+                    <div>
+
+                        <h2>
+                            📋 Saved Analysis Details
+                        </h2>
+
+                        <p>
+                            Complete information from your saved analysis.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="saved-info">
+
+                    <div>
+                        <strong>
+                            Resume
+                        </strong>
+
+                        <span id="savedFilename"></span>
+                    </div>
+
+                    <div>
+                        <strong>
+                            Job Description
+                        </strong>
+
+                        <span id="savedJobDescription"></span>
+                    </div>
+
+                </div>
+
+
+                <!-- SAVED SCORES -->
+
+                <div class="saved-score-grid">
+
+                    <div class="saved-score-card">
+
+                        <span>
+                            Skill Match
+                        </span>
+
+                        <strong id="savedMatchScore">
+                            0
+                        </strong>
+
+                        <small>
+                            %
+                        </small>
+
+                    </div>
+
+
+                    <div class="saved-score-card">
+
+                        <span>
+                            Semantic Match
+                        </span>
+
+                        <strong id="savedSemanticScore">
+                            0
+                        </strong>
+
+                        <small>
+                            %
+                        </small>
+
+                    </div>
+
+
+                    <div class="saved-score-card">
+
+                        <span>
+                            Final Score
+                        </span>
+
+                        <strong id="savedFinalScore">
+                            0
+                        </strong>
+
+                        <small>
+                            %
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SAVED SKILLS -->
+
+                <div class="saved-results-grid">
+
+                    <div class="skill-panel matched-panel">
+
+                        <div class="panel-title matched-title">
+                            ✓ Matched Skills
+                        </div>
+
+                        <ul id="savedMatchedSkills"></ul>
+
+                    </div>
+
+
+                    <div class="skill-panel missing-panel">
+
+                        <div class="panel-title missing-title">
+                            ✕ Missing Skills
+                        </div>
+
+                        <ul id="savedMissingSkills"></ul>
+
+                    </div>
+
+                </div>
+
+
+                <div class="insight-panel recommendation-panel">
+
+                    <div class="insight-title">
+                        💡 Skill Recommendations
+                    </div>
+
+                    <ul id="savedRecommendations"></ul>
+
+                </div>
+
+
+                <div class="insight-panel resume-panel">
+
+                    <div class="insight-title">
+                        📄 Resume Suggestions
+                    </div>
+
+                    <ul id="savedResumeSuggestions"></ul>
+
+                </div>
+
+
+                <div class="insight-panel interview-panel">
+
+                    <div class="insight-title">
+                        🎤 Interview Questions
+                    </div>
+
+                    <ol id="savedInterviewQuestions"></ol>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 HISTORY
+            ================================================== -->
+
+            <section
+                id="history"
+                class="dashboard-card history-card"
+            >
+
+                <div class="history-heading">
+
+                    <div>
+
+                        <h2>
+                            ◷ Recent Analysis History
+                        </h2>
+
+                        <p>
+                            Review your previous resume analyses.
+                        </p>
+
+                    </div>
+
+                    <button
+                        id="historyBtn"
+                        class="history-btn"
+                    >
+                        View All History
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="historyLoading"
+                    class="history-loading hidden"
+                >
+                    Loading your analysis history...
+                </div>
+
+
+                <div id="historyContainer"></div>
+
+            </section>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

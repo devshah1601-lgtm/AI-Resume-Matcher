@@ -1,0 +1,582 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #1f2937;
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 40px auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+h1 {
+    color: #172554;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #64748b;
+}
+
+
+/* CARDS */
+
+.card,
+#result,
+.result-card,
+.score-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+}
+
+.card {
+    padding: 30px;
+    margin-bottom: 25px;
+}
+
+.card h2 {
+    margin-top: 0;
+}
+
+
+/* INPUTS */
+
+label {
+    display: block;
+    font-weight: bold;
+    margin: 20px 0 8px;
+}
+
+input[type="file"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+textarea {
+    height: 160px;
+    resize: vertical;
+}
+
+
+/* BUTTON */
+
+button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 8px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+
+/* LOADING */
+
+#loading {
+    text-align: center;
+    padding: 30px;
+    background: white;
+    border-radius: 16px;
+    margin-bottom: 25px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+}
+
+.loader {
+    width: 35px;
+    height: 35px;
+    border: 4px solid #dbeafe;
+    border-top: 4px solid #2563eb;
+    border-radius: 50%;
+    margin: auto;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* RESULTS */
+
+#result {
+    padding: 30px;
+}
+
+.result-title {
+    text-align: center;
+    color: #172554;
+    margin-bottom: 30px;
+}
+
+
+/* SCORE */
+
+.score-card {
+    text-align: center;
+    padding: 30px;
+    margin-bottom: 25px;
+}
+
+.score-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: #2563eb;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: auto;
+}
+
+.score-circle span {
+    font-size: 42px;
+    font-weight: bold;
+}
+
+.score-circle small {
+    font-size: 20px;
+    margin-top: 15px;
+}
+
+.score-card h3 {
+    margin-bottom: 5px;
+}
+
+.score-card p {
+    color: #64748b;
+}
+
+
+/* TWO COLUMN RESULTS */
+
+.results-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+
+/* RESULT CARDS */
+
+.result-card {
+    padding: 25px;
+    margin-bottom: 20px;
+}
+
+.result-card h3 {
+    margin-top: 0;
+    margin-bottom: 18px;
+}
+
+.result-card ul,
+.result-card ol {
+    padding-left: 25px;
+}
+
+.result-card li {
+    margin-bottom: 10px;
+}
+
+
+/* MATCHED SKILLS */
+
+.matched {
+    border-left: 5px solid #16a34a;
+}
+
+.matched h3 {
+    color: #15803d;
+}
+
+
+/* MISSING SKILLS */
+
+.missing {
+    border-left: 5px solid #dc2626;
+}
+
+.missing h3 {
+    color: #b91c1c;
+}
+
+
+/* RECOMMENDATIONS */
+
+#recommendations li {
+    background: #eff6ff;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+
+/* RESUME SUGGESTIONS */
+
+#resumeSuggestions li {
+    background: #f8fafc;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+
+/* INTERVIEW QUESTIONS */
+
+#interviewQuestions li {
+    padding: 12px;
+    margin-bottom: 10px;
+    background: #f8fafc;
+    border-radius: 8px;
+}
+
+
+/* HIDDEN */
+
+.hidden {
+    display: none;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    .container {
+        width: 95%;
+        margin: 20px auto;
+    }
+
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+
+    #result {
+        padding: 20px;
+    }
+
+    .score-circle {
+        width: 130px;
+        height: 130px;
+    }
+
+    .score-circle span {
+        font-size: 36px;
+    }
+}
+/* ==============================
+   ANALYSIS HISTORY
+   ============================== */
+
+.history-card {
+    margin-top: 30px;
+}
+
+.history-card h2 {
+    margin-bottom: 20px;
+}
+
+#historyBtn {
+    margin-bottom: 20px;
+}
+
+.history-item {
+    background: white;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 18px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.history-header h3 {
+    margin: 0;
+}
+
+.history-date {
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.history-job {
+    background: #f8fafc;
+    padding: 14px;
+    border-radius: 10px;
+    margin-bottom: 18px;
+}
+
+.history-job p {
+    margin: 8px 0 0;
+    color: #4b5563;
+}
+
+.history-scores {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.history-score {
+    text-align: center;
+    padding: 14px;
+    background: #f8fafc;
+    border-radius: 10px;
+}
+
+.history-score span {
+    display: block;
+    font-size: 13px;
+    color: #6b7280;
+    margin-bottom: 6px;
+}
+
+.history-score strong {
+    font-size: 22px;
+}
+
+.history-score.final {
+    background: #eef2ff;
+}
+
+.history-score.final strong {
+    font-size: 26px;
+}
+
+@media (max-width: 700px) {
+
+    .history-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .history-scores {
+        grid-template-columns: 1fr;
+    }
+
+}
+/* ==============================
+   USER BAR
+   ============================== */
+
+.user-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: white;
+
+    padding: 12px 18px;
+    margin-bottom: 20px;
+
+    border-radius: 10px;
+
+    border: 1px solid #e5e7eb;
+
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.user-bar span {
+    color: #374151;
+}
+
+.user-bar button {
+    background: #ef4444;
+    color: white;
+
+    border: none;
+    border-radius: 8px;
+
+    padding: 9px 16px;
+
+    cursor: pointer;
+}
+
+.user-bar button:hover {
+    background: #dc2626;
+}
+/* ==============================
+   DASHBOARD SUMMARY
+   ============================== */
+
+.dashboard-summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin: 25px 0;
+}
+
+.summary-card {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    text-align: center;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.summary-icon {
+    display: block;
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.summary-card h3 {
+    margin: 5px 0;
+    font-size: 26px;
+}
+
+.summary-card p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+
+@media (max-width: 800px) {
+
+    .dashboard-summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .dashboard-summary {
+        grid-template-columns: 1fr;
+    }
+
+}
+/* ==============================
+   ANALYSIS HISTORY
+============================== */
+
+.history-card {
+    margin-top: 30px;
+}
+
+.history-card h2 {
+    margin-bottom: 20px;
+}
+
+#historyContainer {
+    margin-top: 20px;
+}
+
+.history-item {
+    background: #ffffff;
+    border: 1px solid #e1e5eb;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.history-item h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    color: #172033;
+    font-size: 18px;
+    word-break: break-word;
+}
+
+.history-item p {
+    margin: 7px 0;
+    color: #444;
+}
+
+.history-item strong {
+    color: #172033;
+}
+
+.history-item .view-analysis-btn {
+    margin-top: 15px;
+    width: 100%;
+    padding: 11px;
+    border: none;
+    border-radius: 8px;
+    background: #2563eb;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.history-item .view-analysis-btn:hover {
+    background: #1d4ed8;
+}
+
+/* Score layout */
+
+.history-scores {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.history-score {
+    background: #f5f7fa;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.history-score strong {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+.history-score span {
+    font-size: 12px;
+    color: #666;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .history-scores {
+        grid-template-columns: 1fr;
+    }
+
+}

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Resume Job Matcher</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+    <!-- AUTH SECTION -->
+
+<div id="authSection" class="card">
+
+    <h2>Welcome</h2>
+
+    <p>
+        Login to analyze your resume and save your analysis history.
+    </p>
+
+    <label for="email">
+        Email
+    </label>
+
+    <input
+        type="email"
+        id="email"
+        placeholder="Enter your email"
+    >
+
+    <label for="password">
+        Password
+    </label>
+
+    <input
+        type="password"
+        id="password"
+        placeholder="Enter your password"
+    >
+
+    <div class="auth-buttons">
+
+        <button id="loginBtn">
+            Login
+        </button>
+
+        <button id="signupBtn">
+            Create Account
+        </button>
+
+    </div>
+
+    <p id="authMessage"></p>
+
+</div>
+
+    <div id="appSection" class="hidden">
+        <div class="user-bar">
+
+            <span>
+                👤 <strong id="userEmail"></strong>
+            </span>
+
+            <button id="logoutBtn">
+                Logout
+            </button>
+
+        </div>
+
+    <header>
+        <h1>AI Resume Job Matcher</h1>
+
+        <p class="subtitle">
+            Analyze your resume against a job description using AI
+        </p>
+    </header>
+        <!-- DASHBOARD SUMMARY -->
+
+<div class="dashboard-summary">
+
+    <div class="summary-card">
+        <span class="summary-icon">📊</span>
+        <h3 id="totalAnalyses">0</h3>
+        <p>Total Analyses</p>
+    </div>
+
+    <div class="summary-card">
+        <span class="summary-icon">🎯</span>
+        <h3 id="averageScore">0%</h3>
+        <p>Average Match</p>
+    </div>
+
+    <div class="summary-card">
+        <span class="summary-icon">⭐</span>
+        <h3 id="bestScore">0%</h3>
+        <p>Best Match</p>
+    </div>
+
+    <div class="summary-card">
+        <span class="summary-icon">📄</span>
+        <h3 id="resumeCount">0</h3>
+        <p>Resumes Analyzed</p>
+    </div>
+
+</div>
+
+
+    <!-- INPUT SECTION -->
+
+    <div class="card">
+
+        <h2>Resume Analysis</h2>
+
+        <label for="resume">
+            Upload Resume
+        </label>
+
+        <input
+            type="file"
+            id="resume"
+            accept=".pdf"
+        >
+
+        <label for="jobDescription">
+            Job Description
+        </label>
+
+        <textarea
+            id="jobDescription"
+            placeholder="Paste the job description here..."
+        ></textarea>
+
+        <button id="analyzeBtn">
+            Analyze Resume
+        </button>
+
+    </div>
+
+
+    <!-- LOADING -->
+
+    <div id="loading" class="hidden">
+        <div class="loader"></div>
+        <p>Analyzing your resume...</p>
+    </div>
+
+
+    <!-- RESULTS -->
+
+    <div id="result" class="hidden">
+
+        <h2 class="result-title">
+            Analysis Results
+        </h2>
+
+
+        <!-- SCORE -->
+
+        <div class="score-card">
+
+            <div class="score-circle">
+
+                <span id="finalScore">
+                    0
+                </span>
+
+                <small>%</small>
+
+            </div>
+
+            <h3>Overall Match Score</h3>
+
+            <p>
+                How well your resume matches the job
+            </p>
+
+        </div>
+
+
+        <!-- SKILLS -->
+
+        <div class="results-grid">
+
+            <div class="result-card matched">
+
+                <h3>✓ Matched Skills</h3>
+
+                <ul id="matchedSkills"></ul>
+
+            </div>
+
+
+            <div class="result-card missing">
+
+                <h3>✗ Missing Skills</h3>
+
+                <ul id="missingSkills"></ul>
+
+            </div>
+
+        </div>
+
+
+        <!-- RECOMMENDATIONS -->
+
+        <div class="result-card">
+
+            <h3>💡 Skill Recommendations</h3>
+
+            <ul id="recommendations"></ul>
+
+        </div>
+
+
+        <!-- RESUME SUGGESTIONS -->
+
+        <div class="result-card">
+
+            <h3>📄 Resume Suggestions</h3>
+
+            <ul id="resumeSuggestions"></ul>
+
+        </div>
+
+
+                <!-- INTERVIEW QUESTIONS -->
+
+        <div class="result-card">
+
+            <h3>🎤 Interview Questions</h3>
+
+            <ol id="interviewQuestions"></ol>
+
+        </div>
+
+    </div>
+        <!-- SAVED ANALYSIS DETAILS -->
+
+<div id="savedAnalysisDetails" class="result-card hidden">
+
+    <h2>📋 Saved Analysis Details</h2>
+
+    <div class="saved-analysis-info">
+
+        <p>
+            <strong>Resume:</strong>
+            <span id="savedFilename"></span>
+        </p>
+
+        <p>
+            <strong>Job Description:</strong>
+            <span id="savedJobDescription"></span>
+        </p>
+
+    </div>
+
+
+    <div class="results-grid">
+
+        <div class="score-card small-score">
+
+            <div class="score-circle">
+
+                <span id="savedMatchScore">
+                    0
+                </span>
+
+                <small>%</small>
+
+            </div>
+
+            <h3>Skill Match</h3>
+
+        </div>
+
+
+        <div class="score-card small-score">
+
+            <div class="score-circle">
+
+                <span id="savedSemanticScore">
+                    0
+                </span>
+
+                <small>%</small>
+
+            </div>
+
+            <h3>Semantic Match</h3>
+
+        </div>
+
+
+        <div class="score-card small-score">
+
+            <div class="score-circle">
+
+                <span id="savedFinalScore">
+                    0
+                </span>
+
+                <small>%</small>
+
+            </div>
+
+            <h3>Final Score</h3>
+
+        </div>
+
+    </div>
+
+
+    <div class="result-card matched">
+
+        <h3>✓ Matched Skills</h3>
+
+        <ul id="savedMatchedSkills"></ul>
+
+    </div>
+
+
+    <div class="result-card missing">
+
+        <h3>✗ Missing Skills</h3>
+
+        <ul id="savedMissingSkills"></ul>
+
+    </div>
+
+
+    <div class="result-card">
+
+        <h3>💡 Skill Recommendations</h3>
+
+        <ul id="savedRecommendations"></ul>
+
+    </div>
+
+
+    <div class="result-card">
+
+        <h3>📄 Resume Suggestions</h3>
+
+        <ul id="savedResumeSuggestions"></ul>
+
+    </div>
+
+
+    <div class="result-card">
+
+        <h3>🎤 Interview Questions</h3>
+
+        <ol id="savedInterviewQuestions"></ol>
+
+    </div>
+
+</div>
+
+
+    <!-- ANALYSIS HISTORY -->
+
+    <div class="result-card history-card">
+
+        <h2>📊 My Analysis History</h2>
+
+        <button id="historyBtn">
+            Load My History
+        </button>
+
+        <div id="historyLoading" class="hidden">
+            Loading your analysis history...
+        </div>
+
+        <div id="historyContainer"></div>
+
+    </div>
+
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

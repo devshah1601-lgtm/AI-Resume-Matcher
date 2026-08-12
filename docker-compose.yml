@@ -1,0 +1,25 @@
+services:
+  db:
+    image: postgres:16
+    container_name: ai_resume_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Devshah2005@123
+      POSTGRES_DB: ai_resume_matcher
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: .
+    container_name: ai_resume_backend
+    ports:
+      - "8001:8001"
+    env_file:
+      - .env
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
