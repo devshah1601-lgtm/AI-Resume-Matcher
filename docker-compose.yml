@@ -4,7 +4,7 @@ services:
     container_name: ai_resume_db
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: Devshah2005@123
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ai_resume_matcher
     ports:
       - "5432:5432"
