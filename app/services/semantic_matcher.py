@@ -1,24 +1,19 @@
-from sentence_transformers import SentenceTransformer
-import numpy as np
+import re
+from collections import Counter
 
 
-model = None
+def _tokenize(text: str) -> list[str]:
+    """
+    Convert text into normalized words.
+    """
+    return re.findall(r"[a-zA-Z0-9]+", text.lower())
 
 
-def get_model():
-    global model
-
-    if model is None:
-        print("Loading semantic AI model...")
-
-        model = SentenceTransformer(
-            "paraphrase-MiniLM-L3-v2",
-            device="cpu"
-        )
-
-        print("Semantic AI model loaded.")
-
-    return model
+def _build_vector(tokens: list[str]) -> Counter:
+    """
+    Build a simple word-frequency vector.
+    """
+    return Counter(tokens)
 
 
 def calculate_semantic_similarity(
@@ -26,44 +21,51 @@ def calculate_semantic_similarity(
     job_description: str
 ) -> float:
     """
-    Calculate semantic similarity between a resume
-    and a job description.
+    Lightweight semantic-style similarity.
+
+    Uses word-frequency overlap instead of loading a
+    SentenceTransformer/PyTorch model, making it suitable
+    for low-memory deployments.
     """
 
-    semantic_model = get_model()
+    resume_tokens = _tokenize(resume_text)
+    job_tokens = _tokenize(job_description)
 
-    # Encode both texts together instead of making two
-    # separate model calls.
-    embeddings = semantic_model.encode(
-        [resume_text, job_description],
-        convert_to_numpy=True,
-        normalize_embeddings=True
+    if not resume_tokens or not job_tokens:
+        return 0.0
+
+    resume_vector = _build_vector(resume_tokens)
+    job_vector = _build_vector(job_tokens)
+
+    shared_words = set(resume_vector) & set(job_vector)
+
+    if not shared_words:
+        return 0.0
+
+    # Weighted overlap based on term frequency.
+    shared_score = sum(
+        min(resume_vector[word], job_vector[word])
+        for word in shared_words
     )
 
-    resume_embedding = embeddings[0]
-    job_embedding = embeddings[1]
+    total_score = sum(job_vector.values())
 
-    similarity = float(
-        np.dot(resume_embedding, job_embedding)
-    )
+    if total_score == 0:
+        return 0.0
 
-    print("RAW SEMANTIC SIMILARITY:", similarity)
+    similarity = shared_score / total_score
 
-    # Convert cosine similarity (-1 to 1)
-    # into a percentage (0 to 100)
-    score = ((similarity + 1) / 2) * 100
+    # Convert to percentage.
+    score = similarity * 100
+
+    print("LIGHTWEIGHT SEMANTIC SIMILARITY:", round(score, 2))
 
     return round(score, 2)
 
 
 def preload_model():
     """
-    Load the semantic model during application startup
-    instead of waiting for the first /analyze-resume request.
+    Kept for compatibility with any existing imports.
+    No model needs to be loaded anymore.
     """
-
-    print("Preloading semantic AI model...")
-
-    get_model()
-
-    print("Semantic AI model ready.")
+    print("Lightweight semantic matcher ready.")
