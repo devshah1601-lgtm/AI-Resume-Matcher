@@ -1,5 +1,5 @@
 from sentence_transformers import SentenceTransformer
-from sklearn.metrics.pairwise import cosine_similarity
+import numpy as np
 
 
 model = None
@@ -10,7 +10,12 @@ def get_model():
 
     if model is None:
         print("Loading semantic AI model...")
-        model = SentenceTransformer("all-MiniLM-L6-v2")
+
+        model = SentenceTransformer(
+            "paraphrase-MiniLM-L3-v2",
+            device="cpu"
+        )
+
         print("Semantic AI model loaded.")
 
     return model
@@ -27,18 +32,38 @@ def calculate_semantic_similarity(
 
     semantic_model = get_model()
 
-    resume_embedding = semantic_model.encode([resume_text])
-    job_embedding = semantic_model.encode([job_description])
+    # Encode both texts together instead of making two
+    # separate model calls.
+    embeddings = semantic_model.encode(
+        [resume_text, job_description],
+        convert_to_numpy=True,
+        normalize_embeddings=True
+    )
 
-    similarity = cosine_similarity(
-        resume_embedding,
-        job_embedding
-    )[0][0]
+    resume_embedding = embeddings[0]
+    job_embedding = embeddings[1]
+
+    similarity = float(
+        np.dot(resume_embedding, job_embedding)
+    )
 
     print("RAW SEMANTIC SIMILARITY:", similarity)
 
     # Convert cosine similarity (-1 to 1)
     # into a percentage (0 to 100)
-    score = ((float(similarity) + 1) / 2) * 100
+    score = ((similarity + 1) / 2) * 100
 
     return round(score, 2)
+
+
+def preload_model():
+    """
+    Load the semantic model during application startup
+    instead of waiting for the first /analyze-resume request.
+    """
+
+    print("Preloading semantic AI model...")
+
+    get_model()
+
+    print("Semantic AI model ready.")

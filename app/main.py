@@ -24,7 +24,10 @@ from app.auth import (
 from app.services.pdf_service import extract_text_from_pdf
 from app.services.skill_extractor import extract_skills
 from app.services.matching_service import calculate_match
-from app.services.semantic_matcher import calculate_semantic_similarity
+from app.services.semantic_matcher import (
+    calculate_semantic_similarity,
+    preload_model
+)
 from app.services.recommendation_service import generate_recommendations
 from app.services.resume_suggestions import generate_resume_suggestions
 from app.services.interview_service import generate_interview_questions
@@ -33,6 +36,9 @@ app = FastAPI(
     title="AI Resume Job Matcher",
     version="0.1.0"
 )
+@app.on_event("startup")
+def startup_event():
+    preload_model()
 
 class SignupRequest(BaseModel):
     email: str
