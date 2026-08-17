@@ -432,3 +432,25 @@ https://github.com/devshah1601-lgtm
 ## 📜 License
 
 This project is currently intended as a personal learning and portfolio project.
+
+## 📸 Screenshots
+
+### 🔐 Login
+
+![Login](screenshots/login.png)
+
+### 📊 Dashboard
+
+![Dashboard](screenshots/dashboard.png)
+
+### 📝 New Resume Analysis
+
+![New Analysis](screenshots/new-analysis.png)
+
+### 📚 Analysis History
+
+![Analysis History](screenshots/history.png)
+
+### 🎯 Analysis Results
+
+![Analysis Results](screenshots/analysis-results.png)
