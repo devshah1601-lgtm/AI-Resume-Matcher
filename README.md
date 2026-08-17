@@ -441,11 +441,11 @@ This project is currently intended as a personal learning and portfolio project.
 
 ### 📊 Dashboard
 
-![Dashboard](screenshots/dashboard.png)
+![Dashboard](screenshots/Dashboard.png)
 
 ### 📝 New Resume Analysis
 
-![New Analysis](screenshots/new-analysis.png)
+![New Analysis](screenshots/new_analysis.png)
 
 ### 📚 Analysis History
 
@@ -453,4 +453,4 @@ This project is currently intended as a personal learning and portfolio project.
 
 ### 🎯 Analysis Results
 
-![Analysis Results](screenshots/analysis-results.png)
+![Analysis Results](screenshots/analysis-result.png)
